@@ -7,7 +7,7 @@
         <module>qblog-dao</module>
         <module>qblog-service</module>
         <module>qblog-web</module>
-        <module>util</module>
+        <module>qblog-util</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
