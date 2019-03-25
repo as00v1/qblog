@@ -9,7 +9,13 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>qblog-dao</artifactId>
+    <artifactId>qblog-api</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.qiaohx</groupId>
+            <artifactId>qblog-util</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

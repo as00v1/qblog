@@ -12,4 +12,8 @@ public class Test {
         logger.info("终于输出了");
     }
 
+    public static void out() {
+        logger.info("终于输出了");
+    }
+
 }

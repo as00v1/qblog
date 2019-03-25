@@ -1,5 +1,6 @@
 package com.qiaohx.qblogweb.controller;
 
+import com.qiaohx.util.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ public class TestController {
 
     @RequestMapping("/qblog")
     public String qblog(){
+        Test.out();
         return "hello qblog";
     }
 

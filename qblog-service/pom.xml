@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.qiaohx</groupId>
-            <artifactId>qblog-dao</artifactId>
+            <artifactId>qblog-api</artifactId>
         </dependency>
     </dependencies>
 

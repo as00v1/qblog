@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <packaging>pom</packaging>
     <modules>
-        <module>qblog-dao</module>
+        <module>qblog-api</module>
         <module>qblog-service</module>
         <module>qblog-web</module>
         <module>qblog-util</module>
@@ -52,6 +52,18 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- swagger自动生成接口文档 -->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.9.2</version>
+        </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.9.2</version>
+        </dependency>
     </dependencies>
 
     <!-- 统一管理依赖的版本号 -->
@@ -59,7 +71,7 @@
         <dependencies>
             <dependency>
                 <groupId>com.qiaohx</groupId>
-                <artifactId>qblog-dao</artifactId>
+                <artifactId>qblog-api</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
             <dependency>
@@ -74,15 +86,10 @@
             </dependency>
             <dependency>
                 <groupId>com.qiaohx</groupId>
-                <artifactId>util</artifactId>
+                <artifactId>qblog-util</artifactId>
                 <version>0.0.1-SNAPSHOT</version>
             </dependency>
 
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-core</artifactId>
-                <version>1.2.3</version>
-            </dependency>
         </dependencies>
     </dependencyManagement>
     <!--<build>
