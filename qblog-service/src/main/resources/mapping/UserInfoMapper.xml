@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.qiaohx.qblog.service.user.dao.UserInfoMapper" >
   <resultMap id="BaseResultMap" type="com.qiaohx.qblog.service.user.model.UserInfo" >
-    <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    <id column="USER_ID" property="userId" jdbcType="VARCHAR" />
     <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
     <result column="NICK_NAME" property="nickName" jdbcType="VARCHAR" />
     <result column="HEAD_IMAGE_URL" property="headImageUrl" jdbcType="VARCHAR" />
@@ -15,6 +15,20 @@
     <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
     <result column="CID" property="cid" jdbcType="CHAR" />
   </resultMap>
+  <sql id="Base_Column_List" >
+    USER_ID, USER_NAME, NICK_NAME, HEAD_IMAGE_URL, PHONE, E_MAIL, ADDRESS, FLAG, INTRODUCTION, 
+    CREATE_DATE, UPDATE_DATE, CID
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from user_info
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from user_info
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </delete>
   <insert id="insert" parameterType="com.qiaohx.qblog.service.user.model.UserInfo" >
     insert into user_info (USER_ID, USER_NAME, NICK_NAME, 
       HEAD_IMAGE_URL, PHONE, E_MAIL, 
@@ -106,4 +120,58 @@
       </if>
     </trim>
   </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiaohx.qblog.service.user.model.UserInfo" >
+    update user_info
+    <set >
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="headImageUrl != null" >
+        HEAD_IMAGE_URL = #{headImageUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="eMail != null" >
+        E_MAIL = #{eMail,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        ADDRESS = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="flag != null" >
+        FLAG = #{flag,jdbcType=CHAR},
+      </if>
+      <if test="introduction != null" >
+        INTRODUCTION = #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cid != null" >
+        CID = #{cid,jdbcType=CHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiaohx.qblog.service.user.model.UserInfo" >
+    update user_info
+    set USER_NAME = #{userName,jdbcType=VARCHAR},
+      NICK_NAME = #{nickName,jdbcType=VARCHAR},
+      HEAD_IMAGE_URL = #{headImageUrl,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      E_MAIL = #{eMail,jdbcType=VARCHAR},
+      ADDRESS = #{address,jdbcType=VARCHAR},
+      FLAG = #{flag,jdbcType=CHAR},
+      INTRODUCTION = #{introduction,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      CID = #{cid,jdbcType=CHAR}
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+  </update>
 </mapper>
