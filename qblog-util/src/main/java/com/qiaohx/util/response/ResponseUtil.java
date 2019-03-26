@@ -10,11 +10,11 @@ import java.lang.reflect.InvocationTargetException;
  */
 public class ResponseUtil {
 
-    public static final String SUCCESS = "success";
+    static final String SUCCESS = "success";
     /**
      * 请求成功
      * @param o 数据
-     * @return
+     * @return BaseDataResponse
      */
     public static <T extends BaseDataResponse> T success(Class<T> o){
         return result(ErrorCodeEnums.SUCCESS, SUCCESS, o);
@@ -26,15 +26,22 @@ public class ResponseUtil {
 
     /**
      * 请求失败
-     * @param errorCode
-     * @return
+     * @param errorCode 错误码
+     * @return BaseDataResponse
      */
     public static BaseDataResponse error(ErrorCodeEnums errorCode){
         return new BaseDataResponse(errorCode.getCode(), errorCode.getMessage());
     }
 
+    /**
+     * 校验失败
+     * @param bindingResult 校验结果
+     * @param o 返回的类型
+     * @param <T> BaseDataResponse
+     * @return BaseDataResponse
+     */
     public static <T extends BaseDataResponse> T fail(BindingResult bindingResult, Class<T> o){
-        String code = bindingResult.getFieldError().getCode();
+        String code = bindingResult.getFieldError() != null ? bindingResult.getFieldError().getCode() : "";
         switch (code) {
             case "NotEmpty":
                 return result(ErrorCodeEnums.PARAM_EMPTY, bindingResult.getFieldError().getDefaultMessage(), o);
@@ -73,19 +80,19 @@ public class ResponseUtil {
 
     /**
      * 返回错误
-     * @param errorCode
-     * @param o
-     * @param <T>
-     * @return
+     * @param errorCode 错误码
+     * @param o 返回类型
+     * @param <T> BaseDataResponse
+     * @return BaseDataResponse
      */
     public static <T extends BaseDataResponse> T result(ErrorCodeEnums errorCode, Class<T> o){
         return result(errorCode, null, o);
     }
     /**
      * 返回业务错误信息
-     * @param errorCode
-     * @param message
-     * @return
+     * @param errorCode 错误码
+     * @param message 自定义消息
+     * @return BaseDataResponse
      */
     public static <T extends BaseDataResponse> T result(ErrorCodeEnums errorCode, String message, Class<T> o){
         T t = null;
