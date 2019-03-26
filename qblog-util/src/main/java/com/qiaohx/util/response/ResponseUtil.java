@@ -20,6 +20,10 @@ public class ResponseUtil {
         return result(ErrorCodeEnums.SUCCESS, SUCCESS, o);
     }
 
+    public static BaseDataResponse success(){
+        return new BaseDataResponse(ErrorCodeEnums.SUCCESS.getCode(), ErrorCodeEnums.SUCCESS.getMessage());
+    }
+
     /**
      * 请求失败
      * @param errorCode
@@ -68,6 +72,16 @@ public class ResponseUtil {
     }
 
     /**
+     * 返回错误
+     * @param errorCode
+     * @param o
+     * @param <T>
+     * @return
+     */
+    public static <T extends BaseDataResponse> T result(ErrorCodeEnums errorCode, Class<T> o){
+        return result(errorCode, null, o);
+    }
+    /**
      * 返回业务错误信息
      * @param errorCode
      * @param message
@@ -78,10 +92,15 @@ public class ResponseUtil {
         try {
             Constructor c = o.getDeclaredConstructor(new Class[]{int.class,String.class});
             c.setAccessible(true);
-            t = (T) c.newInstance(new Object[]{errorCode.getCode(), message});
+            if (message != null && !"".equals(message))
+                t = (T) c.newInstance(new Object[]{errorCode.getCode(), message});
+            else
+                t = (T) c.newInstance(new Object[]{errorCode.getCode(), errorCode.getMessage()});
         } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
             e.printStackTrace();
         }
         return t;
     }
+
+
 }

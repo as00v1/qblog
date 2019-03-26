@@ -6,6 +6,8 @@ import com.qiaohx.qblog.api.user.vo.LoginRequestVo;
 import com.qiaohx.qblog.service.user.dao.UserLoginCertMapper;
 import com.qiaohx.qblog.service.user.model.UserLoginCert;
 import com.qiaohx.util.response.BaseDataResponse;
+import com.qiaohx.util.response.ErrorCodeEnums;
+import com.qiaohx.util.response.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,9 @@ public class CheckLoginCertServiceImpl extends AbstractBaseService implements Ch
         logger.info("校验用户信息开始");
         UserLoginCert userLoginCert = userLoginCertMapper.selectByLoginCert(loginRequestVo);
         logger.info("查到结果=" + userLoginCert);
-        return null;
+        if (userLoginCert == null)
+            return ResponseUtil.success();
+        else
+            return ResponseUtil.result(ErrorCodeEnums.RE_CERT, BaseDataResponse.class);
     }
 }
