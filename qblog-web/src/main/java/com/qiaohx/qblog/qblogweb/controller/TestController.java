@@ -1,4 +1,4 @@
-package com.qiaohx.qblogweb.controller;
+package com.qiaohx.qblog.qblogweb.controller;
 
 import com.qiaohx.util.Test;
 import org.slf4j.Logger;

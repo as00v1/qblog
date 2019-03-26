@@ -1,4 +1,4 @@
-package com.qiaohx.qblogweb;
+package com.qiaohx.qblog.qblogweb;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

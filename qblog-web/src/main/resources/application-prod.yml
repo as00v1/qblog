@@ -1,2 +1,7 @@
 logging:
   path: /data/logs
+spring:
+  datasource:
+    url: jdbc:mysql://13.230.161.7:3306/prod
+    username: prod
+    password: 12345678

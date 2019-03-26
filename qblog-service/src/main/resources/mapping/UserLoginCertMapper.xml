@@ -20,6 +20,21 @@
     from user_login_cert
     where LOGIN_CERT_ID = #{loginCertId,jdbcType=VARCHAR}
   </select>
+  <select id="selectByLoginCert" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from user_login_cert
+    where FLAG = '1'
+    <if test="certType != null" >
+      AND CERT_TYPE = #{certType,jdbcType=CHAR}
+    </if>
+    <if test="loginCert != null" >
+      AND LOGIN_CERT = #{loginCert,jdbcType=VARCHAR}
+    </if>
+    <if test="password != null" >
+      AND PASSWORD = #{password,jdbcType=VARCHAR}
+    </if>
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from user_login_cert
     where LOGIN_CERT_ID = #{loginCertId,jdbcType=VARCHAR}

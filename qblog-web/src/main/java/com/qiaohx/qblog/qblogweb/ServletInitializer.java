@@ -1,4 +1,4 @@
-package com.qiaohx.qblogweb;
+package com.qiaohx.qblog.qblogweb;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
