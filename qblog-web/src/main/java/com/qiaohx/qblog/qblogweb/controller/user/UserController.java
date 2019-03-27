@@ -22,7 +22,7 @@ public class UserController {
     @Autowired
     private CheckLoginCertService checkLoginCertService;
 
-    @RequestMapping(value = "/checkLoginCert", method = RequestMethod.GET)
+    @RequestMapping(value = "/checkLoginCert", method = RequestMethod.POST)
     public BaseDataResponse checkLoginCert(@RequestBody LoginRequestVo loginRequestVo){
         try {
             return checkLoginCertService.checkLoginCert(loginRequestVo);
