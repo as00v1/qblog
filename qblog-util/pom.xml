@@ -11,7 +11,7 @@
 
     <artifactId>qblog-util</artifactId>
 
-    <dependencies>
-    </dependencies>
+    <!--<dependencies>
+    </dependencies>-->
 
 </project>
