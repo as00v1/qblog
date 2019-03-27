@@ -5,3 +5,7 @@ spring:
     url: jdbc:mysql://13.230.161.7:3306/prod
     username: prod
     password: 12345678
+  redis:
+    host: 13.230.161.7
+    port: 6379
+    password:
