@@ -21,11 +21,18 @@
     <name>qblog</name>
     <description>qblog后端工程</description>
 
+    <!-- 定义统一的依赖版本号 -->
     <properties>
         <java.version>1.8</java.version>
-        <spring.version>2.1.3.RELEASE</spring.version>
+        <springboot.version>2.1.3.RELEASE</springboot.version>
+        <qblog.version>0.0.1-SNAPSHOT</qblog.version>
+        <mysql.version>5.1.34</mysql.version>
+        <mybatis.version>2.0.0</mybatis.version>
+        <druid.version>1.1.9</druid.version>
+        <swagger.version>2.9.2</swagger.version>
     </properties>
 
+    <!-- 全局依赖 -->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -45,76 +52,82 @@
 
     </dependencies>
 
-    <!-- 统一管理依赖的版本号 -->
+    <!-- 统一管理依赖管理 -->
     <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>com.qiaohx</groupId>
                 <artifactId>qblog-api</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>${qblog.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.qiaohx</groupId>
                 <artifactId>qblog-service</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>${qblog.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.qiaohx</groupId>
                 <artifactId>qblog-web</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>${qblog.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.qiaohx</groupId>
                 <artifactId>qblog-util</artifactId>
-                <version>0.0.1-SNAPSHOT</version>
+                <version>${qblog.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
-                <version>5.1.34</version>
+                <version>${mysql.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
-                <version>${spring.version}</version>
+                <version>${springboot.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>2.0.0</version>
+                <version>${mybatis.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-aop</artifactId>
-                <version>${spring.version}</version>
+                <version>${springboot.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-data-redis</artifactId>
-                <version>${spring.version}</version>
+                <version>${springboot.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-test</artifactId>
+                <version>${springboot.version}</version>
             </dependency>
 
             <dependency>
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
-                <version>1.1.9</version>
+                <version>${druid.version}</version>
             </dependency>
 
             <!-- swagger自动生成接口文档 -->
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger2</artifactId>
-                <version>2.9.2</version>
+                <version>${swagger.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.springfox</groupId>
                 <artifactId>springfox-swagger-ui</artifactId>
-                <version>2.9.2</version>
+                <version>${swagger.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
