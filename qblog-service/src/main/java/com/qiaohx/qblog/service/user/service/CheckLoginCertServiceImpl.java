@@ -11,7 +11,6 @@ import com.qiaohx.util.response.ResponseUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-
 @Service("checkLoginCertService")
 public class CheckLoginCertServiceImpl extends AbstractBaseService implements CheckLoginCertService {
 
