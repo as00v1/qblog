@@ -32,4 +32,12 @@ public interface RedisService {
      * @return value
      */
     Object get(String key, int ttl);
+
+    /**
+     * 获取一个增量
+     * @param key
+     * @param ttl
+     * @return
+     */
+    Long getIncrement(String key, long ttl);
 }

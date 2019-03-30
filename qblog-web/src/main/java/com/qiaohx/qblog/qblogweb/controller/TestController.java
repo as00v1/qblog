@@ -1,6 +1,7 @@
 package com.qiaohx.qblog.qblogweb.controller;
 
 import com.qiaohx.qblog.api.common.redis.RedisService;
+import com.qiaohx.qblog.service.common.sequence.SequenceUtil;
 import com.qiaohx.util.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,5 +39,11 @@ public class TestController {
         logger.info("redis测试");
         String key = request.getParameter("key");
         return (String) redisService.get(key);
+    }
+
+    @RequestMapping("/id")
+    public String getId(HttpServletRequest request){
+        logger.info("获取ID");
+        return SequenceUtil.getSequence();
     }
 }
