@@ -14,5 +14,5 @@ public interface CheckLoginCertService {
      * @return 成功/失败
      * @throws Exception 异常
      */
-    BaseDataResponse checkLoginCert(LoginRequestVo loginRequestVo) throws Exception;
+    BaseDataResponse checkLoginCert(LoginRequestVo loginRequestVo);
 }

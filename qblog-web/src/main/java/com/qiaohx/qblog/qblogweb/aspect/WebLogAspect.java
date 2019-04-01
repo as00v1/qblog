@@ -52,7 +52,6 @@ public class WebLogAspect {
     public void doAfterReturning(Object ret) {
         // 处理完请求，返回内容
         logger.info("方法返回 : " + ret);
-        String ret1="";
     }
 
     //后置异常通知

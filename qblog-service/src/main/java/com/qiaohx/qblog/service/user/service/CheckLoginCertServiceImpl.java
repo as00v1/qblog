@@ -20,7 +20,7 @@ public class CheckLoginCertServiceImpl extends AbstractBaseService implements Ch
     private UserLoginCertMapper userLoginCertMapper;
 
     @Override
-    public BaseDataResponse checkLoginCert(LoginRequestVo loginRequestVo) throws Exception {
+    public BaseDataResponse checkLoginCert(LoginRequestVo loginRequestVo) {
         logger.info("校验用户信息开始");
         UserLoginCert userLoginCert = userLoginCertMapper.selectByLoginCert(loginRequestVo);
         logger.info("查到结果=" + userLoginCert);
