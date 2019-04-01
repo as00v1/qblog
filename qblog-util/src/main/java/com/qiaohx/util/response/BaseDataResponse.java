@@ -41,9 +41,12 @@ public class BaseDataResponse implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseDataResponse{" +
-                "code=" + code +
-                ", errMsg='" + errMsg + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("BaseDataResponse == {");
+        sb.append("\"code\":")
+                .append(code);
+        sb.append(",\"errMsg\":\"")
+                .append(errMsg).append('\"');
+        sb.append('}');
+        return sb.toString();
     }
 }

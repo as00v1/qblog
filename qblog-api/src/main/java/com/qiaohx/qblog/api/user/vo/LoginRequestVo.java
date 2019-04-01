@@ -34,4 +34,17 @@ public class LoginRequestVo implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("LoginRequestVo == {");
+        sb.append("\"certType\":\"")
+                .append(certType).append('\"');
+        sb.append(",\"loginCert\":\"")
+                .append(loginCert).append('\"');
+        sb.append(",\"password\":\"")
+                .append(password).append('\"');
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -125,4 +125,35 @@ public class UserInfo implements Serializable {
     public void setCid(String cid) {
         this.cid = cid == null ? null : cid.trim();
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("UserInfo == {");
+        sb.append("\"userId\":\"")
+                .append(userId).append('\"');
+        sb.append(",\"userName\":\"")
+                .append(userName).append('\"');
+        sb.append(",\"nickName\":\"")
+                .append(nickName).append('\"');
+        sb.append(",\"headImageUrl\":\"")
+                .append(headImageUrl).append('\"');
+        sb.append(",\"phone\":\"")
+                .append(phone).append('\"');
+        sb.append(",\"eMail\":\"")
+                .append(eMail).append('\"');
+        sb.append(",\"address\":\"")
+                .append(address).append('\"');
+        sb.append(",\"flag\":\"")
+                .append(flag).append('\"');
+        sb.append(",\"introduction\":\"")
+                .append(introduction).append('\"');
+        sb.append(",\"createDate\":\"")
+                .append(createDate).append('\"');
+        sb.append(",\"updateDate\":\"")
+                .append(updateDate).append('\"');
+        sb.append(",\"cid\":\"")
+                .append(cid).append('\"');
+        sb.append('}');
+        return sb.toString();
+    }
 }

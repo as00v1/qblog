@@ -85,4 +85,27 @@ public class UserLoginLog implements Serializable {
     public void setIp(String ip) {
         this.ip = ip == null ? null : ip.trim();
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("UserLoginLog == {");
+        sb.append("\"loginLogId\":\"")
+                .append(loginLogId).append('\"');
+        sb.append(",\"userId\":\"")
+                .append(userId).append('\"');
+        sb.append(",\"certType\":\"")
+                .append(certType).append('\"');
+        sb.append(",\"loginCert\":\"")
+                .append(loginCert).append('\"');
+        sb.append(",\"password\":\"")
+                .append(password).append('\"');
+        sb.append(",\"flag\":\"")
+                .append(flag).append('\"');
+        sb.append(",\"loginDate\":\"")
+                .append(loginDate).append('\"');
+        sb.append(",\"ip\":\"")
+                .append(ip).append('\"');
+        sb.append('}');
+        return sb.toString();
+    }
 }

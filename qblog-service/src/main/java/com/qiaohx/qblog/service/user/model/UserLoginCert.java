@@ -85,4 +85,27 @@ public class UserLoginCert implements Serializable {
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("UserLoginCert == {");
+        sb.append("\"loginCertId\":\"")
+                .append(loginCertId).append('\"');
+        sb.append(",\"userId\":\"")
+                .append(userId).append('\"');
+        sb.append(",\"certType\":\"")
+                .append(certType).append('\"');
+        sb.append(",\"loginCert\":\"")
+                .append(loginCert).append('\"');
+        sb.append(",\"password\":\"")
+                .append(password).append('\"');
+        sb.append(",\"flag\":\"")
+                .append(flag).append('\"');
+        sb.append(",\"createDate\":\"")
+                .append(createDate).append('\"');
+        sb.append(",\"updateDate\":\"")
+                .append(updateDate).append('\"');
+        sb.append('}');
+        return sb.toString();
+    }
 }
