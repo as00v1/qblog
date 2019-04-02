@@ -2,6 +2,7 @@ package com.qiaohx.qblog.qblogweb.aspect;
 
 import com.qiaohx.util.date.DateFormatRules;
 import com.qiaohx.util.date.DateUtil;
+import com.qiaohx.util.response.BaseDataResponse;
 import com.qiaohx.util.response.ErrorCodeEnums;
 import com.qiaohx.util.response.ResponseUtil;
 import org.slf4j.Logger;
@@ -30,7 +31,9 @@ public class GlobalExceptionHandler {
         logger.error("============================" + DateUtil.dateToStr(DateFormatRules.YYYY_MM_DD_HH_MM_SS) + " ERROR ============================");
         logger.error("catch exception:", e);
 
-        ResponseEntity<String> entity = new ResponseEntity(ResponseUtil.error(ErrorCodeEnums.UNKNOW_ERROR), HttpStatus.INTERNAL_SERVER_ERROR);
+        ResponseEntity<String> entity =
+                new ResponseEntity(ResponseUtil.result(ErrorCodeEnums.UNKNOW_ERROR, e.getMessage(), BaseDataResponse.class),
+                        HttpStatus.INTERNAL_SERVER_ERROR);
 
         return entity;
     }

@@ -72,6 +72,7 @@ public class RegisterServiceImpl extends AbstractBaseService implements Register
             logger.debug("开始插入登录凭证信息");
             row = userLoginCertMapper.insertSelective(userLoginCert);
             if (row == 1){
+//                throw new Exception("插入登录凭证失败！");
                 return ResponseUtil.success();
             }else {
                 logger.error("没有插入登录凭证信息！");

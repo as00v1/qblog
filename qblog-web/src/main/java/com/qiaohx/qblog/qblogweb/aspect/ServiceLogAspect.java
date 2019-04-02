@@ -7,10 +7,6 @@ import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 
 /**
@@ -33,9 +29,10 @@ public class ServiceLogAspect {
      */
     @Before("serviceLog()")
     public void doBefore(JoinPoint joinPoint){
+        String method = joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
         // 记录下请求内容
-        logger.info("============================接口" + DateUtil.dateToStr(DateFormatRules.YYYY_MM_DD_HH_MM_SS) + " START ============================");
-        logger.info("调用接口 : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+        logger.info(String.format("======= SERVICE %s START =======", method));
+        logger.info("调用接口 : " + method);
         logger.info("接口入参 : " + Arrays.toString(joinPoint.getArgs()));
         ;
     }
@@ -57,7 +54,9 @@ public class ServiceLogAspect {
 
     //后置最终通知,final增强，不管是抛出异常或者正常退出都会执行
     @After("serviceLog()")
-    public void after(){
-        logger.info("============================接口" + DateUtil.dateToStr(DateFormatRules.YYYY_MM_DD_HH_MM_SS) + " END ============================");
+    public void after(JoinPoint joinPoint){
+        String method = joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
+        // 记录下请求内容
+        logger.info(String.format("======= SERVICE %s END =======", method));
     }
 }

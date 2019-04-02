@@ -36,14 +36,15 @@ public class WebLogAspect {
         // 接收到请求，记录请求内容
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
+        String method = joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
         // 记录下请求内容
-        logger.info("============================" + DateUtil.dateToStr(DateFormatRules.YYYY_MM_DD_HH_MM_SS) + " START ============================");
+        logger.info(String.format("======= API %s START =======", method));
         logger.info("SESSION_ID : " + request.getSession().getId());
         logger.info("URL : " + request.getRequestURL().toString());
         logger.info("HTTP_METHOD : " + request.getMethod());
         logger.info("IP : " + request.getRemoteAddr());
-        logger.info("REAL IP : " + request.getHeader("X-Real-IP"));
-        logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName());
+        logger.info("REAL IP : " + request.getHeader("X-Real-IP"));// nginx放的真实IP
+        logger.info("CLASS_METHOD : " + method);
         logger.info("ARGS : " + Arrays.toString(joinPoint.getArgs()));
         ;
     }
@@ -51,14 +52,14 @@ public class WebLogAspect {
     @AfterReturning(returning = "ret", pointcut = "webLog()")
     public void doAfterReturning(Object ret) {
         // 处理完请求，返回内容
-        logger.info("方法返回 : " + ret);
+        logger.info("API返回 : " + ret);
     }
 
     //后置异常通知
     @AfterThrowing("webLog()")
     public void afterThrowing(JoinPoint joinPoint){
         logger.error(DateUtil.dateToStr(DateFormatRules.YYYY_MM_DD_HH_MM_SS) + " ERROR");
-        logger.error("方法抛出异常");
+        logger.error("API抛出异常");
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         logger.error("SESSION_ID : " + request.getSession().getId());
@@ -70,12 +71,14 @@ public class WebLogAspect {
         logger.error("ARGS : " + Arrays.toString(joinPoint.getArgs()));
     }
 
-    //后置最终通知,final增强，不管是抛出异常或者正常退出都会执行
+    // 后置最终通知,final增强，不管是抛出异常或者正常退出都会执行
     @After("webLog()")
     public void after(JoinPoint joinPoint){
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
+        String method = joinPoint.getSignature().getDeclaringTypeName() + "." + joinPoint.getSignature().getName();
+        // 打出结束参数
         logger.info("SESSION_ID : " + request.getSession().getId());
-        logger.info("============================" + DateUtil.dateToStr(DateFormatRules.YYYY_MM_DD_HH_MM_SS) + " END ============================");
+        logger.info(String.format("======= API %s END =======", method));
     }
 }
