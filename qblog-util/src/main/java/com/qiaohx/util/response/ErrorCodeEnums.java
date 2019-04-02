@@ -12,8 +12,11 @@ public enum ErrorCodeEnums {
     /**
      * 登录问题
      */
-    LOGIN_FAIL(1000, "登录失效，请重新登录！"),// 1000-1999留作登录
+    LOGIN_ERROR(1000, "登录失效，请重新登录！"),// 1000-1999留作登录
     RE_CERT(1001, "用户名重复！"),
+    LOGIN_CERT_FAIL(1002, "用户名或密码错误！"),
+    PASSWORD_FAIL(1003, "用户名或密码错误！"),
+    USER_FREEZE(1004, "此用户已被冻结！"),
     /**
      * 参数问题
      */

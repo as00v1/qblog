@@ -10,6 +10,15 @@ public class LoginRequestVo implements Serializable {
     private String certType;
     private String loginCert;
     private String password;
+    private String ip;
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
 
     public String getCertType() {
         return certType;

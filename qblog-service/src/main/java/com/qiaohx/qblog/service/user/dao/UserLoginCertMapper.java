@@ -23,5 +23,5 @@ public interface UserLoginCertMapper {
      * @param record
      * @return
      */
-    UserLoginCert selectByLoginCert(LoginRequestVo record);
+    UserLoginCert selectByLoginCert(UserLoginCert record);
 }
