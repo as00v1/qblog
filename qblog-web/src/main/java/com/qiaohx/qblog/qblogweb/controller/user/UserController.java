@@ -3,8 +3,10 @@ package com.qiaohx.qblog.qblogweb.controller.user;
 import com.qiaohx.qblog.api.user.service.CheckLoginCertService;
 import com.qiaohx.qblog.api.user.service.LoginService;
 import com.qiaohx.qblog.api.user.service.RegisterService;
+import com.qiaohx.qblog.api.user.service.SelectUserInfoByCidService;
 import com.qiaohx.qblog.api.user.vo.LoginRequestVo;
 import com.qiaohx.qblog.api.user.vo.RegisterRequestVo;
+import com.qiaohx.qblog.api.user.vo.UserInfoResponseVo;
 import com.qiaohx.util.response.BaseDataResponse;
 import com.qiaohx.util.response.ErrorCodeEnums;
 import com.qiaohx.util.response.ResponseUtil;
@@ -30,6 +32,8 @@ public class UserController {
     private RegisterService registerService;
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private SelectUserInfoByCidService selectUserInfoByCidService;
 
     @RequestMapping(value = "/checkLoginCert", method = RequestMethod.POST)
     public BaseDataResponse checkLoginCert(@RequestBody LoginRequestVo loginRequestVo){
@@ -56,4 +60,14 @@ public class UserController {
         return loginService.login(loginRequestVo);
     }
 
+    /**
+     * 根据cid定位用户信息
+     * @param cid 用户标识
+     * @return 用户信息
+     * @throws Exception 异常
+     */
+    @RequestMapping(value = "/selectUserInfo", method = RequestMethod.GET)
+    public UserInfoResponseVo selectUserInfo(String cid) throws Exception{
+        return selectUserInfoByCidService.selectUserInfoByCid(cid);
+    }
 }
