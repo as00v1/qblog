@@ -88,7 +88,7 @@ public class UserLoginCert implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("UserLoginCert == {");
+        final StringBuilder sb = new StringBuilder("{");
         sb.append("\"loginCertId\":\"")
                 .append(loginCertId).append('\"');
         sb.append(",\"userId\":\"")

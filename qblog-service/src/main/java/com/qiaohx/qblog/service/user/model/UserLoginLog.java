@@ -88,7 +88,7 @@ public class UserLoginLog implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("UserLoginLog == {");
+        final StringBuilder sb = new StringBuilder("{");
         sb.append("\"loginLogId\":\"")
                 .append(loginLogId).append('\"');
         sb.append(",\"userId\":\"")

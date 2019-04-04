@@ -1,6 +1,7 @@
 package com.qiaohx.qblog.service.user.service;
 
 import com.qiaohx.qblog.api.common.AbstractBaseService;
+import com.qiaohx.qblog.api.common.redis.RedisService;
 import com.qiaohx.qblog.api.user.service.LoginService;
 import com.qiaohx.qblog.api.user.vo.LoginRequestVo;
 import com.qiaohx.qblog.api.user.vo.LoginResponseVo;
@@ -14,6 +15,7 @@ import com.qiaohx.qblog.service.user.model.UserLoginLog;
 import com.qiaohx.util.constant.BaseConstant;
 import com.qiaohx.util.response.ErrorCodeEnums;
 import com.qiaohx.util.response.ResponseUtil;
+import com.qiaohx.util.serialize.SerializeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +31,8 @@ public class LoginServiceImpl extends AbstractBaseService implements LoginServic
     private UserLoginLogMapper userLoginLogMapper;
     @Autowired
     private UserInfoMapper userInfoMapper;
+    @Autowired
+    private RedisService redisService;
 
     /**
      * 登录
@@ -94,6 +98,10 @@ public class LoginServiceImpl extends AbstractBaseService implements LoginServic
             userInfo.setCid(UUID.randomUUID().toString().replaceAll("-", ""));
             userInfoMapper.updateByPrimaryKeySelective(userInfo);
         }
+
+        // 存入redis
+        redisService.set(cid, userInfo, 60 * 60 * 24);
+
         LoginResponseVo loginResponseVo = ResponseUtil.success(LoginResponseVo.class);
         loginResponseVo.setCid(cid);
 

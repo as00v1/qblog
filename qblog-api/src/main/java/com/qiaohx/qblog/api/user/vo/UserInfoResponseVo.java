@@ -1,6 +1,8 @@
 package com.qiaohx.qblog.api.user.vo;
 
 import com.qiaohx.util.response.BaseDataResponse;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -8,6 +10,7 @@ import java.util.Date;
 /**
  * 查询用户信息返回
  */
+@ApiModel("用户信息")
 public class UserInfoResponseVo extends BaseDataResponse implements Serializable {
     public UserInfoResponseVo() {
         super();
@@ -17,24 +20,34 @@ public class UserInfoResponseVo extends BaseDataResponse implements Serializable
         super(code, errMsg);
     }
 
+    @ApiModelProperty(value = "用户ID", required = true)
     private String userId;
 
+    @ApiModelProperty(value = "用户姓名")
     private String userName;
 
+    @ApiModelProperty(value = "用户昵称")
     private String nickName;
 
+    @ApiModelProperty(value = "头像")
     private String headImageUrl;
 
+    @ApiModelProperty(value = "联系电话")
     private String phone;
 
+    @ApiModelProperty(value = "邮箱")
     private String eMail;
 
+    @ApiModelProperty(value = "地址")
     private String address;
 
+    @ApiModelProperty(value = "自我介绍")
     private String introduction;
 
+    @ApiModelProperty(value = "注册日期", required = true)
     private Date createDate;
 
+    @ApiModelProperty(value = "用户标识", required = true)
     private String cid;
 
     private static final long serialVersionUID = 1L;

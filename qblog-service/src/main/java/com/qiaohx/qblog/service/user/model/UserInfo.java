@@ -128,7 +128,7 @@ public class UserInfo implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("UserInfo == {");
+        final StringBuilder sb = new StringBuilder("{");
         sb.append("\"userId\":\"")
                 .append(userId).append('\"');
         sb.append(",\"userName\":\"")

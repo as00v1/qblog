@@ -2,21 +2,25 @@ package com.qiaohx.qblog.service.common.redis;
 
 import com.qiaohx.qblog.api.common.redis.RedisService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 @Component
 public class RedisServiceImpl implements RedisService {
-
-    @Autowired
-    private ValueOperations<String, Object> valueOperations;
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
 
+    @Autowired
+    private ValueOperations<String, Object> valueOperations;
+
+    @Autowired
+    private HashOperations<String, String, Object> hashOperations;
     /**
      * 存不带失效时间
      *
@@ -24,9 +28,10 @@ public class RedisServiceImpl implements RedisService {
      * @param value value
      */
     @Override
-    public void set(String key, String value) {
+    public void set(String key, Object value) {
         valueOperations.set(key, value);
     }
+
 
     /**
      * 放，带失效时间
@@ -36,8 +41,42 @@ public class RedisServiceImpl implements RedisService {
      * @param ttl   ttl
      */
     @Override
-    public void set(String key, String value, int ttl) {
-        valueOperations.set(key, value, ttl);
+    public void set(String key, Object value, int ttl) {
+        valueOperations.set(key, value, ttl, TimeUnit.SECONDS);
+    }
+
+    /**
+     * 设置失效时间
+     *
+     * @param key  key
+     * @param ttl 时间
+     */
+    @Override
+    public void expire(String key, long ttl) {
+        expire(key, ttl, TimeUnit.SECONDS);
+    }
+
+    /**
+     * 设置失效时间
+     *
+     * @param key      key
+     * @param time     时间
+     * @param timeUnit 时间单位
+     */
+    @Override
+    public void expire(String key, long time, TimeUnit timeUnit) {
+        redisTemplate.expire(key, time, timeUnit);
+    }
+
+    /**
+     * 设置失效时间点
+     *
+     * @param key  key
+     * @param date 日期
+     */
+    @Override
+    public void expireAt(String key, Date date) {
+        redisTemplate.expireAt(key, date);
     }
 
     /**
@@ -60,7 +99,10 @@ public class RedisServiceImpl implements RedisService {
      */
     @Override
     public Object get(String key, int ttl) {
-        return null;
+        Object o = valueOperations.get(key);
+        if (o != null)
+            expire(key, ttl);
+        return o;
     }
 
     /**
