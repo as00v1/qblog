@@ -53,6 +53,21 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            <plugin>
+
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+
+                <configuration>
+                    <url>http://118.24.212.141:8000/manager/text</url>
+                    <username>deploy</username>
+                    <password>deploy</password>
+                    <update>true</update>
+                    <path>/qblog</path>
+                </configuration>
+
+            </plugin>
         </plugins>
     </build>
 </project>
