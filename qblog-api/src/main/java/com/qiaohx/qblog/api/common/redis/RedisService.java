@@ -61,9 +61,30 @@ public interface RedisService {
 
     /**
      * 获取一个增量
-     * @param key
-     * @param ttl
+     * @param key key
+     * @param ttl ttl
      * @return
      */
     Long getIncrement(String key, long ttl);
+
+    /**
+     * 删除
+     * @param key key
+     */
+    boolean delete(String key);
+
+    /**
+     * 加锁
+     * @param key key
+     * @param value value
+     * @return true/false
+     */
+    boolean lock(String key, String value);
+
+    /**
+     * 解锁
+     * @param key key
+     * @param value value
+     */
+    void unlock(String key,String value);
 }

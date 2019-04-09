@@ -1,5 +1,6 @@
 package com.qiaohx.qblog.qblogweb.controller.user;
 
+import com.qiaohx.qblog.api.common.redis.RedisService;
 import com.qiaohx.qblog.api.user.service.CheckLoginCertService;
 import com.qiaohx.qblog.api.user.service.LoginService;
 import com.qiaohx.qblog.api.user.service.RegisterService;
@@ -8,6 +9,7 @@ import com.qiaohx.qblog.api.user.vo.LoginRequestVo;
 import com.qiaohx.qblog.api.user.vo.LoginResponseVo;
 import com.qiaohx.qblog.api.user.vo.RegisterRequestVo;
 import com.qiaohx.qblog.api.user.vo.UserInfoResponseVo;
+import com.qiaohx.util.constant.BaseConstant;
 import com.qiaohx.util.response.BaseDataResponse;
 import com.qiaohx.util.response.ErrorCodeEnums;
 import com.qiaohx.util.response.ResponseUtil;
@@ -39,6 +41,8 @@ public class UserController {
     private LoginService loginService;
     @Autowired
     private SelectUserInfoByCidService selectUserInfoByCidService;
+    @Autowired
+    private RedisService redisService;
 
     @ApiOperation(value = "检查用户名重复", notes = "用于注册账号时，检查用户名是否可用的接口")
     @RequestMapping(value = "/checkLoginCert", method = RequestMethod.POST)
@@ -55,7 +59,23 @@ public class UserController {
     @ApiOperation(value = "用户注册接口")
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public BaseDataResponse register(@RequestBody RegisterRequestVo registerInfoVo) throws Exception{
-        return registerService.addRegisterUser(registerInfoVo);
+        LoginRequestVo loginRequestVo = new LoginRequestVo();
+        loginRequestVo.setCertType(registerInfoVo.getCertType());
+        loginRequestVo.setLoginCert(registerInfoVo.getLoginCert());
+        BaseDataResponse baseDataResponse = checkLoginCertService.checkLoginCert(loginRequestVo);
+        if (baseDataResponse.getCode() != 0){
+            return baseDataResponse;
+        }
+        // 对用户名加分布式锁
+        String loginCert = "REGISTER-" + registerInfoVo.getLoginCert();
+        long time = System.currentTimeMillis() + BaseConstant.TIME_OUT;
+        if(!redisService.lock(loginCert, String.valueOf(time))){
+            return ResponseUtil.result(ErrorCodeEnums.SYSTEM_BUSY, BaseDataResponse.class);
+        }
+        baseDataResponse = registerService.addRegisterUser(registerInfoVo);
+        // 解锁
+        redisService.unlock(loginCert, String.valueOf(time));
+        return baseDataResponse;
     }
 
     @ApiOperation(value = "用户登录接口", notes = "登陆后返回用户cid，后续用户相关操作以cid为准")

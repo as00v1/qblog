@@ -41,15 +41,6 @@ public class RegisterServiceImpl extends AbstractBaseService implements Register
      */
     @Override
     public BaseDataResponse addRegisterUser(RegisterRequestVo registerInfoVo) throws Exception {
-        LoginRequestVo loginRequestVo = new LoginRequestVo();
-        loginRequestVo.setCertType(registerInfoVo.getCertType());
-        loginRequestVo.setLoginCert(registerInfoVo.getLoginCert());
-        BaseDataResponse baseDataResponse = checkLoginCertService.checkLoginCert(loginRequestVo);
-        if (baseDataResponse.getCode() != 0){
-            logger.info("登录名校验有问题");
-            return baseDataResponse;
-        }
-
         // 用户信息
         String userId = SequenceUtil.getSequence();
         UserInfo userInfo = new UserInfo();
