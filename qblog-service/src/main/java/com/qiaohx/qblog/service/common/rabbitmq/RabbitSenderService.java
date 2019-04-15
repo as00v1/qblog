@@ -1,6 +1,5 @@
 package com.qiaohx.qblog.service.common.rabbitmq;
 
-import com.qiaohx.util.constant.MQConstant;
 import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,8 +19,8 @@ public class RabbitSenderService {
      *
      * @param message 消息体
      */
-    public void send(String message) {
-        amqpTemplate.convertAndSend(MQConstant.EXCHANGE_AMQ_DIRECT, MQConstant.ROUTING_KEY_TEST_ROUTING_KEY, message);
+    public void send(String exchangeName, String routingKey, String message) {
+        amqpTemplate.convertAndSend(exchangeName, routingKey, message);
     }
 
 }

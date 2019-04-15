@@ -13,9 +13,9 @@ import java.io.Serializable;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BaseDataResponse implements Serializable {
 
-    public BaseDataResponse(){
-        super();
-    }
+//    public BaseDataResponse(){
+//        super();
+//    }
 
     public BaseDataResponse(int code, String errMsg) {
         this.code = code;

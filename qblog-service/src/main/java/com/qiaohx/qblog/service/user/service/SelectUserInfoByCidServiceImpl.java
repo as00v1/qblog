@@ -43,7 +43,7 @@ public class SelectUserInfoByCidServiceImpl extends AbstractBaseService implemen
             logger.warn(String.format("用户 %s 状态为 %s ，禁止访问", userInfo.getUserId(), flag));
             return ResponseUtil.result(ErrorCodeEnums.USER_FREEZE, UserInfoResponseVo.class);
         }
-        UserInfoResponseVo userInfoResponseVo = new UserInfoResponseVo();
+        UserInfoResponseVo userInfoResponseVo = ResponseUtil.success(UserInfoResponseVo.class);
         BeanUtils.copyProperties(userInfo, userInfoResponseVo);
         return userInfoResponseVo;
     }

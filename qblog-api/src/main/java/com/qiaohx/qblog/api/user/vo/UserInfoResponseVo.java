@@ -12,9 +12,6 @@ import java.util.Date;
  */
 @ApiModel("用户信息")
 public class UserInfoResponseVo extends BaseDataResponse implements Serializable {
-    public UserInfoResponseVo() {
-        super();
-    }
 
     public UserInfoResponseVo(int code, String errMsg) {
         super(code, errMsg);

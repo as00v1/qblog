@@ -1,5 +1,6 @@
 package com.qiaohx.qblog.service.common.rabbitmq;
 
+import com.qiaohx.qblog.api.common.AbstractBaseService;
 import com.qiaohx.util.constant.MQConstant;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.rabbit.annotation.Exchange;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Component;
  * MQ消费者
  */
 @Component
-public class RabbitReceiverService {
+public class RabbitReceiverService extends AbstractBaseService {
 
     /**
      * === 在RabbitMQ上创建queue,exchange,binding 方法二：直接在@RabbitListener声明 begin ===
@@ -46,4 +47,6 @@ public class RabbitReceiverService {
         // ...
         System.out.println("[ReceiveMsg-2] receive msg: " + content);
     }
+
+
 }

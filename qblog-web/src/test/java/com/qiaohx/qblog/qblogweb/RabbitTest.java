@@ -1,6 +1,7 @@
 package com.qiaohx.qblog.qblogweb;
 
 import com.qiaohx.qblog.service.common.rabbitmq.RabbitSenderService;
+import com.qiaohx.util.constant.MQConstant;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,7 +23,7 @@ public class RabbitTest extends QblogWebApplicationTests {
     public void send(){
         for (int i = 0; i < 3; i++) {
             String testContent = "send msg via spring boot test " + i;
-            rabbitKit.send(testContent);
+            rabbitKit.send(MQConstant.EXCHANGE_AMQ_DIRECT,MQConstant.ROUTING_KEY_TEST_ROUTING_KEY, testContent);
         }
         try {
             Thread.sleep(10 * 1000);

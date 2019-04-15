@@ -5,15 +5,18 @@ import com.qiaohx.qblog.api.user.service.CheckLoginCertService;
 import com.qiaohx.qblog.api.user.service.RegisterService;
 import com.qiaohx.qblog.api.user.vo.LoginRequestVo;
 import com.qiaohx.qblog.api.user.vo.RegisterRequestVo;
+import com.qiaohx.qblog.service.common.rabbitmq.RabbitSenderService;
 import com.qiaohx.qblog.service.common.sequence.SequenceUtil;
 import com.qiaohx.qblog.service.user.dao.UserInfoMapper;
 import com.qiaohx.qblog.service.user.dao.UserLoginCertMapper;
 import com.qiaohx.qblog.service.user.model.UserInfo;
 import com.qiaohx.qblog.service.user.model.UserLoginCert;
 import com.qiaohx.util.constant.BaseConstant;
+import com.qiaohx.util.constant.MQConstant;
 import com.qiaohx.util.response.BaseDataResponse;
 import com.qiaohx.util.response.ErrorCodeEnums;
 import com.qiaohx.util.response.ResponseUtil;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -31,6 +34,8 @@ public class RegisterServiceImpl extends AbstractBaseService implements Register
     private UserLoginCertMapper userLoginCertMapper;
     @Autowired
     private UserInfoMapper userInfoMapper;
+    @Autowired
+    private RabbitSenderService rabbitSenderService;
 
     /**
      * 添加注册用户
@@ -64,6 +69,12 @@ public class RegisterServiceImpl extends AbstractBaseService implements Register
             row = userLoginCertMapper.insertSelective(userLoginCert);
             if (row == 1){
 //                throw new Exception("插入登录凭证失败！");
+
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("userId", userId);
+                rabbitSenderService.send(MQConstant.EXCHANGE_AMQ_DIRECT, MQConstant.ROUTING_KEY_BLOG_OPEN_ROUTING_KEY,
+                        jsonObject.toString());
+
                 return ResponseUtil.success();
             }else {
                 logger.error("没有插入登录凭证信息！");

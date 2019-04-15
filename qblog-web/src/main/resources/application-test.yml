@@ -9,3 +9,8 @@ spring:
     host: 13.230.161.7
     port: 6379
     password:
+  rabbitmq:
+    host: 13.230.161.7
+    port: 5672
+    username: guest
+    password: guest

@@ -18,4 +18,13 @@ public class BlogOpenRequestVo implements Serializable {
     public void setUserId(String userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"userId\":\"")
+                .append(userId).append('\"');
+        sb.append('}');
+        return sb.toString();
+    }
 }
