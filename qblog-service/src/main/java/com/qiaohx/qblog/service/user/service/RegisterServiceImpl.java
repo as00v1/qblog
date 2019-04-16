@@ -72,6 +72,7 @@ public class RegisterServiceImpl extends AbstractBaseService implements Register
 
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("userId", userId);
+                jsonObject.put("blogName", registerInfoVo.getLoginCert() + "的博客");
                 rabbitSenderService.send(MQConstant.EXCHANGE_AMQ_DIRECT, MQConstant.ROUTING_KEY_BLOG_OPEN_ROUTING_KEY,
                         jsonObject.toString());
 
