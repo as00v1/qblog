@@ -19,7 +19,7 @@
 			<property name="forceBigDecimals" value="false" />
 		</javaTypeResolver>
 		<!-- 生成模型的包名和位置 -->
-		<javaModelGenerator targetPackage="com.qiaohx.qblog.service.user.model" targetProject="src/main/java">
+		<javaModelGenerator targetPackage="com.qiaohx.qblog.service.blog.model" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 			<property name="trimStrings" value="true" />
 		</javaModelGenerator>
@@ -29,12 +29,12 @@
 		</sqlMapGenerator>
 		
 		<!--生成DAO的包名和位置-->
-		<javaClientGenerator type="XMLMAPPER" targetPackage="com.qiaohx.qblog.service.user.dao" targetProject="src/main/java">
+		<javaClientGenerator type="XMLMAPPER" targetPackage="com.qiaohx.qblog.service.blog.dao" targetProject="src/main/java">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 		<!-- 要生成那些表(更改tableName和domainObjectName就可以) -->
 
-	  <table tableName="user_login_cert" domainObjectName="UserLoginCert" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
-	  <table tableName="user_info" domainObjectName="UserInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
+	  <table tableName="user_blog_rel" domainObjectName="UserBlogRel" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
+	  <table tableName="blog_info" domainObjectName="BlogInfo" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false" />
 	</context>
 </generatorConfiguration>

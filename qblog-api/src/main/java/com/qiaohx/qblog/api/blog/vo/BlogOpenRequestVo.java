@@ -10,6 +10,26 @@ public class BlogOpenRequestVo implements Serializable {
 
     @ApiModelProperty(value = "用户ID", required = true, example = "example")
     private String userId;
+    @ApiModelProperty(value = "博客名称", required = true, example = "example")
+    private String blogName;
+    @ApiModelProperty(value = "博客简介", example = "example")
+    private String introduce;
+
+    public String getBlogName() {
+        return blogName;
+    }
+
+    public void setBlogName(String blogName) {
+        this.blogName = blogName;
+    }
+
+    public String getIntroduce() {
+        return introduce;
+    }
+
+    public void setIntroduce(String introduce) {
+        this.introduce = introduce;
+    }
 
     public String getUserId() {
         return userId;
@@ -24,6 +44,10 @@ public class BlogOpenRequestVo implements Serializable {
         final StringBuilder sb = new StringBuilder("{");
         sb.append("\"userId\":\"")
                 .append(userId).append('\"');
+        sb.append(",\"blogName\":\"")
+                .append(blogName).append('\"');
+        sb.append(",\"introduce\":\"")
+                .append(introduce).append('\"');
         sb.append('}');
         return sb.toString();
     }

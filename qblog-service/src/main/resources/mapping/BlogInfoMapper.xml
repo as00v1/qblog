@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiaohx.qblog.service.blog.dao.BlogInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.qiaohx.qblog.service.blog.model.BlogInfo" >
+    <id column="BLOG_ID" property="blogId" jdbcType="VARCHAR" />
+    <result column="BOLG_NAME" property="bolgName" jdbcType="VARCHAR" />
+    <result column="INTRODUCE" property="introduce" jdbcType="VARCHAR" />
+    <result column="LEVEL" property="level" jdbcType="INTEGER" />
+    <result column="FLAG" property="flag" jdbcType="CHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="BLOG_TAG" property="blogTag" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    BLOG_ID, BOLG_NAME, INTRODUCE, LEVEL, FLAG, CREATE_DATE, BLOG_TAG
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from blog_info
+    where BLOG_ID = #{blogId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from blog_info
+    where BLOG_ID = #{blogId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qiaohx.qblog.service.blog.model.BlogInfo" >
+    insert into blog_info (BLOG_ID, BOLG_NAME, INTRODUCE, 
+      LEVEL, FLAG, CREATE_DATE, 
+      BLOG_TAG)
+    values (#{blogId,jdbcType=VARCHAR}, #{bolgName,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, 
+      #{level,jdbcType=INTEGER}, #{flag,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{blogTag,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiaohx.qblog.service.blog.model.BlogInfo" >
+    insert into blog_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="blogId != null" >
+        BLOG_ID,
+      </if>
+      <if test="bolgName != null" >
+        BOLG_NAME,
+      </if>
+      <if test="introduce != null" >
+        INTRODUCE,
+      </if>
+      <if test="level != null" >
+        LEVEL,
+      </if>
+      <if test="flag != null" >
+        FLAG,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="blogTag != null" >
+        BLOG_TAG,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="blogId != null" >
+        #{blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="bolgName != null" >
+        #{bolgName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        #{level,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="blogTag != null" >
+        #{blogTag,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiaohx.qblog.service.blog.model.BlogInfo" >
+    update blog_info
+    <set >
+      <if test="bolgName != null" >
+        BOLG_NAME = #{bolgName,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        INTRODUCE = #{introduce,jdbcType=VARCHAR},
+      </if>
+      <if test="level != null" >
+        LEVEL = #{level,jdbcType=INTEGER},
+      </if>
+      <if test="flag != null" >
+        FLAG = #{flag,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="blogTag != null" >
+        BLOG_TAG = #{blogTag,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where BLOG_ID = #{blogId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiaohx.qblog.service.blog.model.BlogInfo" >
+    update blog_info
+    set BOLG_NAME = #{bolgName,jdbcType=VARCHAR},
+      INTRODUCE = #{introduce,jdbcType=VARCHAR},
+      LEVEL = #{level,jdbcType=INTEGER},
+      FLAG = #{flag,jdbcType=CHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      BLOG_TAG = #{blogTag,jdbcType=VARCHAR}
+    where BLOG_ID = #{blogId,jdbcType=VARCHAR}
+  </update>
+</mapper>
