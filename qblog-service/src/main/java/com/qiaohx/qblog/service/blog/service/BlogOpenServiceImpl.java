@@ -45,7 +45,6 @@ public class BlogOpenServiceImpl extends AbstractBaseService implements BlogOpen
         logger.info(String.format("[%s] receive msg: %s", MQConstant.QUEUE_BLOG_OPEN_QUEUE, content));
         BlogOpenRequestVo blogOpenRequestVo = (BlogOpenRequestVo)JSONObject.toBean(JSONObject.fromObject(content), BlogOpenRequestVo.class);
         openBlog(blogOpenRequestVo);
-
     }
 
     /**
