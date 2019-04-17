@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.qiaohx.qblog.service.blog.dao.BlogArticleInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.qiaohx.qblog.service.blog.model.BlogArticleInfo" >
+    <id column="ARTICLE_ID" property="articleId" jdbcType="VARCHAR" />
+    <result column="BLOG_ID" property="blogId" jdbcType="VARCHAR" />
+    <result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="KEY_WORD" property="keyWord" jdbcType="VARCHAR" />
+    <result column="ART_ABSTRACT" property="artAbstract" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="UPDATE_DATE" property="updateDate" jdbcType="TIMESTAMP" />
+    <result column="FLAG" property="flag" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.qiaohx.qblog.service.blog.model.BlogArticleInfo" extends="BaseResultMap" >
+    <result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ARTICLE_ID, BLOG_ID, GROUP_ID, TITLE, KEY_WORD, ART_ABSTRACT, CREATE_DATE, UPDATE_DATE, 
+    FLAG
+  </sql>
+  <sql id="Blob_Column_List" >
+    CONTENT
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from blog_article_info
+    where ARTICLE_ID = #{articleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from blog_article_info
+    where ARTICLE_ID = #{articleId,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.qiaohx.qblog.service.blog.model.BlogArticleInfo" >
+    insert into blog_article_info (ARTICLE_ID, BLOG_ID, GROUP_ID, 
+      TITLE, KEY_WORD, ART_ABSTRACT, 
+      CREATE_DATE, UPDATE_DATE, FLAG, 
+      CONTENT)
+    values (#{articleId,jdbcType=VARCHAR}, #{blogId,jdbcType=VARCHAR}, #{groupId,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{keyWord,jdbcType=VARCHAR}, #{artAbstract,jdbcType=VARCHAR}, 
+      #{createDate,jdbcType=TIMESTAMP}, #{updateDate,jdbcType=TIMESTAMP}, #{flag,jdbcType=CHAR}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.qiaohx.qblog.service.blog.model.BlogArticleInfo" >
+    insert into blog_article_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        ARTICLE_ID,
+      </if>
+      <if test="blogId != null" >
+        BLOG_ID,
+      </if>
+      <if test="groupId != null" >
+        GROUP_ID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="keyWord != null" >
+        KEY_WORD,
+      </if>
+      <if test="artAbstract != null" >
+        ART_ABSTRACT,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE,
+      </if>
+      <if test="flag != null" >
+        FLAG,
+      </if>
+      <if test="content != null" >
+        CONTENT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="articleId != null" >
+        #{articleId,jdbcType=VARCHAR},
+      </if>
+      <if test="blogId != null" >
+        #{blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWord != null" >
+        #{keyWord,jdbcType=VARCHAR},
+      </if>
+      <if test="artAbstract != null" >
+        #{artAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        #{flag,jdbcType=CHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.qiaohx.qblog.service.blog.model.BlogArticleInfo" >
+    update blog_article_info
+    <set >
+      <if test="blogId != null" >
+        BLOG_ID = #{blogId,jdbcType=VARCHAR},
+      </if>
+      <if test="groupId != null" >
+        GROUP_ID = #{groupId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="keyWord != null" >
+        KEY_WORD = #{keyWord,jdbcType=VARCHAR},
+      </if>
+      <if test="artAbstract != null" >
+        ART_ABSTRACT = #{artAbstract,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateDate != null" >
+        UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="flag != null" >
+        FLAG = #{flag,jdbcType=CHAR},
+      </if>
+      <if test="content != null" >
+        CONTENT = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where ARTICLE_ID = #{articleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.qiaohx.qblog.service.blog.model.BlogArticleInfo" >
+    update blog_article_info
+    set BLOG_ID = #{blogId,jdbcType=VARCHAR},
+      GROUP_ID = #{groupId,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      KEY_WORD = #{keyWord,jdbcType=VARCHAR},
+      ART_ABSTRACT = #{artAbstract,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      FLAG = #{flag,jdbcType=CHAR},
+      CONTENT = #{content,jdbcType=LONGVARCHAR}
+    where ARTICLE_ID = #{articleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.qiaohx.qblog.service.blog.model.BlogArticleInfo" >
+    update blog_article_info
+    set BLOG_ID = #{blogId,jdbcType=VARCHAR},
+      GROUP_ID = #{groupId,jdbcType=VARCHAR},
+      TITLE = #{title,jdbcType=VARCHAR},
+      KEY_WORD = #{keyWord,jdbcType=VARCHAR},
+      ART_ABSTRACT = #{artAbstract,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=TIMESTAMP},
+      UPDATE_DATE = #{updateDate,jdbcType=TIMESTAMP},
+      FLAG = #{flag,jdbcType=CHAR}
+    where ARTICLE_ID = #{articleId,jdbcType=VARCHAR}
+  </update>
+</mapper>
