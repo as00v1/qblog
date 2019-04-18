@@ -35,6 +35,7 @@ public class ArticleQueryServiceImpl extends AbstractBaseService implements Arti
 
         BlogArticleInfo blogArticleInfo = new BlogArticleInfo();
         blogArticleInfo.setBlogId(blogId);
+        blogArticleInfo.setGroupId(articleQueryRequestVo.getGroupId());
         Page page = PageHelper.startPage(pageNo, pageSize, true);
         List<BlogArticleInfo> blogArticleInfoList = blogArticleInfoMapper.queryByBlogId(blogArticleInfo);
         logger.info(page.getTotal() + "");

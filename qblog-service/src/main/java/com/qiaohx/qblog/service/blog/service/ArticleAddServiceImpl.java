@@ -37,6 +37,7 @@ public class ArticleAddServiceImpl implements ArticleAddService {
         blogArticleInfo.setArticleId(SequenceUtil.getSequence());
         blogArticleInfo.setBlogId(articleAddRequestVo.getBlogId());
         blogArticleInfo.setTitle(articleAddRequestVo.getTitle());
+        blogArticleInfo.setGroupId(articleAddRequestVo.getGroupId());
         blogArticleInfo.setContent(articleAddRequestVo.getContent());
         blogArticleInfo.setArtAbstract(articleAddRequestVo.getArtAbstract());
         blogArticleInfo.setKeyWord(articleAddRequestVo.getKeyWord());

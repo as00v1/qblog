@@ -37,7 +37,7 @@
     from blog_article_info
     where FLAG= '1'
       AND BLOG_ID = #{blogId,jdbcType=VARCHAR}
-      <if test="groupId != null">
+      <if test="groupId != null and groupId != ''">
         AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
       </if>
       order by CREATE_DATE DESC
