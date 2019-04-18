@@ -16,4 +16,6 @@ public interface UserBlogRelMapper {
     int updateByPrimaryKeySelective(UserBlogRel record);
 
     int updateByPrimaryKey(UserBlogRel record);
+
+    UserBlogRel selectByUserId(String userId);
 }

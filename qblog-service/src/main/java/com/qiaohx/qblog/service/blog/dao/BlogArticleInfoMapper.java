@@ -1,7 +1,11 @@
 package com.qiaohx.qblog.service.blog.dao;
 
 import com.qiaohx.qblog.service.blog.model.BlogArticleInfo;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface BlogArticleInfoMapper {
     int deleteByPrimaryKey(String articleId);
 
@@ -16,4 +20,6 @@ public interface BlogArticleInfoMapper {
     int updateByPrimaryKeyWithBLOBs(BlogArticleInfo record);
 
     int updateByPrimaryKey(BlogArticleInfo record);
+
+    List<BlogArticleInfo> queryByBlogId(BlogArticleInfo record);
 }

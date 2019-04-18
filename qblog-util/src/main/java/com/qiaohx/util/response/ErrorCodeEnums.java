@@ -24,6 +24,10 @@ public enum ErrorCodeEnums {
     PARAM_ERROR(2001, "请检查参数！"),
     SYSTEM_BUSY(8888, "系统繁忙，请稍后再试~"),
     /**
+     * 博客问题
+     */
+    BLOG_NONE(3000, "博客不存在，请确认是否开通！"),
+    /**
      * 未知异常
      */
     UNKNOW_ERROR(9999, "服务器开小差啦~");

@@ -12,10 +12,17 @@
     REL_ID, USER_ID, BLOG_ID, FLAG, CREATE_DATE
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from user_blog_rel
     where REL_ID = #{relId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from user_blog_rel
+    where USER_ID = #{userId,jdbcType=VARCHAR}
+    AND FLAG = '1'
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from user_blog_rel

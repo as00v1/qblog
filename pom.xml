@@ -30,6 +30,7 @@
         <mybatis.version>2.0.0</mybatis.version>
         <druid.version>1.1.9</druid.version>
         <swagger.version>2.9.2</swagger.version>
+        <pagehelper.version>1.2.3</pagehelper.version>
     </properties>
 
     <!-- 全局依赖 -->
@@ -144,9 +145,9 @@
             </dependency>
 
             <dependency>
-                <groupId>net.sf.json-lib</groupId>
-                <artifactId>json-lib</artifactId>
-
+                <groupId>com.github.pagehelper</groupId>
+                <artifactId>pagehelper-spring-boot-starter</artifactId>
+                <version>${pagehelper.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
