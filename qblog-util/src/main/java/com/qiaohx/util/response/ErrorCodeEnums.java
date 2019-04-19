@@ -28,6 +28,10 @@ public enum ErrorCodeEnums {
      */
     BLOG_NONE(3000, "博客不存在，请确认是否开通！"),
     /**
+     * 文章不存在
+     */
+    ARTICLE_NONE(3001, "文章不存在！"),
+    /**
      * 未知异常
      */
     UNKNOW_ERROR(9999, "服务器开小差啦~");
