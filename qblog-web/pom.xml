@@ -4,7 +4,7 @@
     <parent>
         <artifactId>qblog</artifactId>
         <groupId>com.qiaohx</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>1.0.RELEASE</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
