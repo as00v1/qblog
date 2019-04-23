@@ -96,7 +96,7 @@ public class UserController {
      */
     @ApiOperation(value = "用户信息查询接口")
     @RequestMapping(value = "/selectUserInfo", method = RequestMethod.GET)
-    public UserInfoResponseVo selectUserInfo(@ApiParam(value = "用户唯一标识", example = "581d267befe0487ba55c1ecb1fda2491") String cid) throws Exception{
+    public UserInfoResponseVo selectUserInfo(String cid) throws Exception{
         return selectUserInfoByCidService.selectUserInfoByCid(cid);
     }
 }

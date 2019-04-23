@@ -65,4 +65,23 @@ public class BlogGroupInfo implements Serializable {
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
     }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("{");
+        sb.append("\"groupId\":\"")
+                .append(groupId).append('\"');
+        sb.append(",\"groupName\":\"")
+                .append(groupName).append('\"');
+        sb.append(",\"blogId\":\"")
+                .append(blogId).append('\"');
+        sb.append(",\"flag\":\"")
+                .append(flag).append('\"');
+        sb.append(",\"createDate\":\"")
+                .append(createDate).append('\"');
+        sb.append(",\"updateDate\":\"")
+                .append(updateDate).append('\"');
+        sb.append('}');
+        return sb.toString();
+    }
 }

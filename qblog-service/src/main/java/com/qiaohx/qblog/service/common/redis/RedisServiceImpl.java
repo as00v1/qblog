@@ -144,7 +144,7 @@ public class RedisServiceImpl extends AbstractBaseService implements RedisServic
     @Override
     public boolean lock(String key, String value) {
         logger.info(String.format("加锁 %s , %s", key, value));
-        if(valueOperations.setIfAbsent(key,value)){//对应setnx命令
+        if(valueOperations.setIfAbsent(key,value)){//对应set nx命令
             //可以成功设置,也就是key不存在
             logger.info("加锁完成！");
             return true;
