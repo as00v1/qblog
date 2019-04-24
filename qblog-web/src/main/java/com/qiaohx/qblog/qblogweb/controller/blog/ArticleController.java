@@ -43,7 +43,11 @@ public class ArticleController {
      * @param articleSelectService 文章详情查询
      */
     @Autowired
-    public ArticleController(ArticleQueryService articleQueryService, ArticleAddService articleAddService, UserBlogSelectService userBlogSelectService, SelectUserInfoByCidService selectUserInfoByCidService, @Qualifier("articleSelectServiceV2") ArticleSelectService articleSelectService) {
+    public ArticleController(ArticleQueryService articleQueryService,
+                             ArticleAddService articleAddService,
+                             UserBlogSelectService userBlogSelectService,
+                             SelectUserInfoByCidService selectUserInfoByCidService,
+                             @Qualifier("articleSelectServiceV3") ArticleSelectService articleSelectService) {
         this.articleQueryService = articleQueryService;
         this.articleAddService = articleAddService;
         this.userBlogSelectService = userBlogSelectService;
