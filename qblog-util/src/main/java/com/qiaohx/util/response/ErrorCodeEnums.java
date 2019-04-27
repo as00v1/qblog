@@ -22,6 +22,10 @@ public enum ErrorCodeEnums {
      */
     PARAM_EMPTY(2000, "请检查必传参数！"),// 2000-2999参数问题
     PARAM_ERROR(2001, "请检查参数！"),
+    /**
+     * 文件上传
+     */
+    FILE_ERROR(3001, "文件上传失败！"),
     SYSTEM_BUSY(8888, "系统繁忙，请稍后再试~"),
     /**
      * 博客问题

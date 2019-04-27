@@ -20,6 +20,11 @@ spring:
     testOnReturn: false
     poolPreparedStatements: true
     maxOpenPreparedStatements: 20
+  servlet:
+    multipart:
+      # springboot内嵌容器限制上传单个文件1M，一次请求10M
+      max-file-size: 10MB
+      max-request-size: 100MB
 mybatis:
   mapper-locations: classpath:mapping/*.xml
   type-aliases-package: com.qiaohx.qblog.service.*.model
