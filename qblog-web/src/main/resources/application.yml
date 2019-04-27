@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: test
+    active: dev
   application:
     name: qblog
   datasource:
@@ -33,3 +33,8 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+qiniu:
+  appkey: dowerBuOZWW7yKxiJHj2ssvTqAhX-xGaoNZQsXoU
+  appsecret: ekWKVFM3AIAye2ueTy8H9ciPROYRZEF128DnaxQn
+  bucket: qblog
+  baseurl: http://image.qiaohx.com/
