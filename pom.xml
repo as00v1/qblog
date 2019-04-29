@@ -40,10 +40,10 @@
         <springboot.version>2.1.3.RELEASE</springboot.version>
         <qblog.version>0.0.1-SNAPSHOT</qblog.version>
         <mysql.version>5.1.34</mysql.version>
-        <mybatis.version>2.0.0</mybatis.version>
+        <qblog-mybatis.version>2.0.0</qblog-mybatis.version>
         <druid.version>1.1.9</druid.version>
+        <qblog-pagehelper.version>1.2.10</qblog-pagehelper.version>
         <swagger.version>2.9.2</swagger.version>
-        <pagehelper.version>1.2.3</pagehelper.version>
     </properties>
 
     <!-- 全局依赖 -->
@@ -112,7 +112,7 @@
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
                 <artifactId>mybatis-spring-boot-starter</artifactId>
-                <version>${mybatis.version}</version>
+                <version>${qblog-mybatis.version}</version>
             </dependency>
 
             <dependency>
@@ -160,7 +160,7 @@
             <dependency>
                 <groupId>com.github.pagehelper</groupId>
                 <artifactId>pagehelper-spring-boot-starter</artifactId>
-                <version>${pagehelper.version}</version>
+                <version>${qblog-pagehelper.version}</version>
             </dependency>
 
             <!-- 文件上传用 -->
