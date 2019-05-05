@@ -19,17 +19,17 @@ public class RabbitTest extends QblogWebApplicationTests {
         }
     }
 
-    @Test
-    public void send(){
-        for (int i = 0; i < 3; i++) {
-            String testContent = "send msg via spring boot test " + i;
-            rabbitKit.send(MQConstant.EXCHANGE_AMQ_DIRECT,MQConstant.ROUTING_KEY_TEST_ROUTING_KEY, testContent);
-        }
-        try {
-            Thread.sleep(10 * 1000);
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-    }
+//    @Test
+//    public void send(){
+//        for (int i = 0; i < 3; i++) {
+//            String testContent = "send msg via spring boot test " + i;
+//            rabbitKit.send(MQConstant.EXCHANGE_AMQ_DIRECT,MQConstant.ROUTING_KEY_TEST_ROUTING_KEY, testContent);
+//        }
+//        try {
+//            Thread.sleep(10 * 1000);
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//
+//    }
 }
