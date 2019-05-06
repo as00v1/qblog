@@ -1,12 +1,10 @@
 package com.qiaohx.qblog.qblogweb.controller.blog;
 
-import com.qiaohx.qblog.api.blog.service.ArticleAddService;
-import com.qiaohx.qblog.api.blog.service.ArticleQueryService;
-import com.qiaohx.qblog.api.blog.service.ArticleSelectService;
-import com.qiaohx.qblog.api.blog.service.UserBlogSelectService;
+import com.qiaohx.qblog.api.blog.service.*;
 import com.qiaohx.qblog.api.blog.vo.*;
 import com.qiaohx.qblog.api.user.service.SelectUserInfoByCidService;
 import com.qiaohx.qblog.api.user.vo.UserInfoResponseVo;
+import com.qiaohx.util.response.BaseDataResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,7 @@ public class ArticleController {
     private final UserBlogSelectService userBlogSelectService;
     private final SelectUserInfoByCidService selectUserInfoByCidService;
     private final ArticleSelectService articleSelectService;
+    private final ArticleUpdateService articleUpdateService;
 
     /**
      * 使用构造函数进行注入
@@ -41,18 +40,20 @@ public class ArticleController {
      * @param userBlogSelectService 用户博客查询
      * @param selectUserInfoByCidService 查询用户信息
      * @param articleSelectService 文章详情查询
+     * @param articleUpdateService 文章更新
      */
     @Autowired
     public ArticleController(ArticleQueryService articleQueryService,
                              ArticleAddService articleAddService,
                              UserBlogSelectService userBlogSelectService,
                              SelectUserInfoByCidService selectUserInfoByCidService,
-                             @Qualifier("articleSelectServiceV3") ArticleSelectService articleSelectService) {
+                             @Qualifier("articleSelectServiceV3") ArticleSelectService articleSelectService, ArticleUpdateService articleUpdateService) {
         this.articleQueryService = articleQueryService;
         this.articleAddService = articleAddService;
         this.userBlogSelectService = userBlogSelectService;
         this.selectUserInfoByCidService = selectUserInfoByCidService;
         this.articleSelectService = articleSelectService;
+        this.articleUpdateService = articleUpdateService;
     }
 
     @ApiOperation(value = "查询博客文章列表", notes = "用于对博客文章的列表分页查询")
@@ -81,5 +82,21 @@ public class ArticleController {
     @RequestMapping(value = "/getArticle", method = RequestMethod.GET)
     public ArticleSelectResponseVo getArticle(String articleId) throws Exception {
         return articleSelectService.selectArticleInfo(articleId);
+    }
+
+    @ApiOperation(value = "更新文章", notes = "用于对博客文章更新")
+    @RequestMapping(value = "/updateArticle", method = RequestMethod.POST)
+    public BaseDataResponse updateArticle(@RequestBody ArticleUpdateRequestVo articleUpdateRequestVo) throws Exception {
+        String cid = articleUpdateRequestVo.getCid();
+        UserInfoResponseVo userInfoResponseVo = selectUserInfoByCidService.selectUserInfoByCid(cid);
+        if (userInfoResponseVo.getCode() != 0){// 用户校验失败
+            return new ArticleAddResponseVo(userInfoResponseVo.getCode(), userInfoResponseVo.getErrMsg());
+        }
+        UserBlogRelVo userBlogRelVo = userBlogSelectService.selectBlogRelByUserId(userInfoResponseVo.getUserId());
+        if (userBlogRelVo.getCode() != 0){
+            return new ArticleAddResponseVo(userBlogRelVo.getCode(), userBlogRelVo.getErrMsg());
+        }
+        articleUpdateRequestVo.setBlogId(userBlogRelVo.getBlogId());
+        return articleUpdateService.updateArticle(articleUpdateRequestVo);
     }
 }
