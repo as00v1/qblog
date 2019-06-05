@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.util.Date;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -116,9 +117,9 @@ public class RedisServiceImpl extends AbstractBaseService implements RedisServic
      */
     @Override
     public Long getIncrement(String key, long ttl) {
-        RedisAtomicLong entityIdCounter = new RedisAtomicLong(key, redisTemplate.getConnectionFactory());
-        Long increment = entityIdCounter.getAndIncrement();
-        if ((null == increment || increment.longValue() == 0) && ttl > 0) {//初始设置过期时间
+        RedisAtomicLong entityIdCounter = new RedisAtomicLong(key, Objects.requireNonNull(redisTemplate.getConnectionFactory()));
+        long increment = entityIdCounter.getAndIncrement();
+        if (increment == 0 && ttl > 0) {//初始设置过期时间
             entityIdCounter.expire(ttl, TimeUnit.MILLISECONDS);//单位毫秒
         }
         return increment;

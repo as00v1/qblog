@@ -30,13 +30,15 @@ public class SelectUserInfoByCidServiceImpl extends AbstractBaseService implemen
             logger.debug("redis命中");
         }else {
             logger.debug("redis未命中");
-//          认为需要重新登录
-//            userInfo = userInfoMapper.selectByCid(cid);
-//            if (userInfo == null){
+            // 查询数据库
+            userInfo = userInfoMapper.selectByCid(cid);
+            if (userInfo == null){
                 logger.warn("用户cid失效");
                 return ResponseUtil.result(ErrorCodeEnums.LOGIN_ERROR, UserInfoResponseVo.class);
-//            }
-
+            }else{
+                // 重建缓存
+                redisService.set(cid, userInfo, 60 * 60 * 24);
+            }
         }
         String flag = userInfo.getFlag();
         if (!"1".equals(flag)){
